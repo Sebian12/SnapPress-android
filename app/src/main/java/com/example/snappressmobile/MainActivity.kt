@@ -4,17 +4,20 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.snappressmobile.ui.theme.SnapPressMobileTheme
 import androidx.compose.ui.unit.dp
+import com.example.snappressmobile.ui.theme.SnapPressMobileTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,11 +25,13 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SnapPressMobileTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                Column(modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.DarkGray) // This colors the entire screen including padding areas
+                    .safeDrawingPadding()
+                ) {
+                    mainWindow()
+                    SelectPhotoBtn()
                 }
             }
         }
@@ -34,11 +39,33 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Surface(color = Color.Red) {
+fun mainWindow(modifier: Modifier = Modifier) {
+    Column (modifier = Modifier
+        .background(Color.Red)
+        .fillMaxWidth()
+    ) {
         Text(
-            text = "SnapPress Mobile\nAlpha v0.1.1",
-            modifier = modifier.padding(24.dp)
+            text = "SnapPress Mobile\nAlpha v0.2.0",
+            textAlign = TextAlign.Center,
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(12.dp)
+        )
+    }
+}
+
+@Composable
+fun SelectPhotoBtn(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .background(Color.Green)
+            .fillMaxWidth()
+    ) {
+        Text(
+            text = "Here will be button to select photos",
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+                .padding(12.dp)
         )
     }
 }
@@ -47,6 +74,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     SnapPressMobileTheme {
-        Greeting("Android")
+        Column {
+            SelectPhotoBtn()
+            mainWindow()
+        }
     }
 }
