@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Surface(color = Color.Red) {
         Text(
-            text = "SnapPress Mobile\nAlpha v0.1",
+            text = "SnapPress Mobile\nAlpha v0.1.1",
             modifier = modifier.padding(24.dp)
         )
     }
